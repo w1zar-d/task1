@@ -201,7 +201,16 @@ public class task1 {
                                     // Каждое совпадение увеличивает счётчик
 
                                     for (int k = 0; k < symbols.length(); k++) {
-                                        if (Integer.parseInt(String.valueOf(localNumber.charAt(k))) == Integer.parseInt(String.valueOf(symbols.charAt(k)))) localCounter++;
+                                        if (Integer.parseInt(String.valueOf(localNumber.charAt(k))) == Integer.parseInt(String.valueOf(symbols.charAt(k)))) {
+                                            localCounter++;
+                                        } else { 
+                                            // Добавлено в новой версии для устранения бага
+                                            // Дело в том, что при схожих номерах - система продолжала 
+                                            // дальше искать совпадения, когда нужно было остановиться
+                                            // получалось, что номер 7637847 подходил под маску 774447
+                                            // потому что повторялась первая семёрка и предпоследняя четвёрка
+                                            k = (symbols.length() + 1);
+                                        }
                                     }
 
                                     // Проверили совпадения. Теперь сопоставляем с количеством совпадений глобального счётчика
